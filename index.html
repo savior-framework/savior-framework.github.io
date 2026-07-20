@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="description" content="SAVIOR">
+  <meta name="author" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SAVIOR</title>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+</head>
+
+<body>
+
+  <nav class="navbar" role="navigation" aria-label="main navigation">
+    <div class="navbar-brand">
+      <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+      </a>
+    </div>
+    <div class="navbar-menu">
+      <div class="navbar-start" style="flex-grow: 1; justify-content: center;">
+        <a class="navbar-item" href="">
+        <span class="icon">
+            <i class="fas fa-home"></i>
+        </span>
+        </a>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link">
+            More Related Research
+          </a>
+          <div class="navbar-dropdown">
+         
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+
+
+  <section class="hero">
+    <div class="hero-body">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered">
+          <div class="column has-text-centered">
+              <h1 class="title is-2 publication-title" style="background: linear-gradient(90deg, #46b1f0 0%, #9b59b6 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">
+                SAVIOR: State-Guided Verified Rollouts for Long-Horizon Video Generation in Robotic Manipulation
+              </h1>
+            <div class="is-size-5 publication-authors">
+              <span class="author-block">
+                  Anonymous Authors
+              </span>
+
+            </div>
+
+          <br>
+
+          <div class="columns is-centered has-text-centered">
+            <div class="publication-links">
+              <span class="link-block">
+                <span class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                    <i class="ai ai-arxiv"></i>
+                  </span>
+                  <span>arXiv</span>
+                </span>
+              </span>
+                            <span class="link-block">
+                              <span class="external-link button is-normal is-rounded is-dark">
+                                <span class="icon">
+                                  <i class="fab fa-youtube"></i>
+                                </span>
+                                <span>Video</span>
+                              </span>
+                            </span>
+
+              <span class="link-block">
+                <span class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                    <i class="fab fa-github"></i>
+                  </span>
+                  <span>Code (coming soon)</span>
+                </span>
+              </span>
+            </div>
+          </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <section class="section content-section">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-full-width">
+          <h2 class="title is-3">Abstract</h2>
+          <div class="content has-text-justified">
+            <p style="font-size: 1.2rem; line-height: 1.8;">
+            Recent advances in video generation have enabled scalable synthesis of robotic manipulation trajectories directly from task instructions. However, existing approaches remain unreliable for long-horizon manipulation because trajectory generation is performed through open-loop autoregressive rollout, where locally inconsistent transitions recursively corrupt future task evolution despite visually plausible intermediate motions. This limitation is particularly critical in robotics, where successful execution depends not only on visual realism, but on preserving executable interaction consistency across extended temporal horizons. We therefore reformulate robotic video generation as verified executable state evolution and propose 
+            <strong>SAVIOR</strong>: 
+            <span style="text-decoration: underline;">S</span>t<span style="text-decoration: underline;">a</span>te-Guided 
+            <span style="text-decoration: underline;">V</span>erified Rollouts for Long-Horizon 
+            V<span style="text-decoration: underline;">i</span>deo Generati<span style="text-decoration: underline;">o</span>n in 
+            <span style="text-decoration: underline;">R</span>obotic Manipulation, 
+            a closed-loop framework that incrementally constructs manipulation trajectories through sequential planning, task-conditioned generation, transition verification, and persistent rollout tracking. Instead of directly propagating generated observations through autoregressive continuation, <strong>SAVIOR</strong> verifies each intermediate transition before rollout propagation, preventing invalid interactions and infeasible task progression from destabilizing downstream generation. Furthermore, <strong>SAVIOR</strong> performs verification at the level of manipulation state transitions rather than dense frame realism, aligning rollout evaluation with executable interaction consistency. Across diverse video generators and long-horizon manipulation tasks, <strong>SAVIOR</strong> consistently improves compositional task completion, interaction consistency, and rollout executability. Our analysis further shows that many long-horizon failures arise not from catastrophic generation collapse, but from the accumulation of locally inconsistent transitions during rollout evolution, highlighting the importance of verified state-guided rollout for reliable robotic video generation.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <section class="section content-section">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-full-width">
+          <h2 class="title is-3">Architecture</h2>
+          <p class="architecture-lead">
+            <strong>Overview.</strong> SAVIOR frames robotic video generation as closed-loop task-state evolution.
+            Each module is verified before its output affects the rollout, keeping long-horizon behavior stable.
+          </p>
+          <div class="architecture-grid">
+            <div class="architecture-card">
+              <h3>Planner</h3>
+              <p>Predicts admissible manipulation objectives from the current task state.</p>
+            </div>
+            <div class="architecture-card">
+              <h3>Generator</h3>
+              <p>Synthesizes task-conditioned state transitions for the next step.</p>
+            </div>
+            <div class="architecture-card">
+              <h3>Validator</h3>
+              <p>Verifies feasibility and task consistency before memory updates.</p>
+            </div>
+            <div class="architecture-card">
+              <h3>State Memory</h3>
+              <p>Persists accumulated progress and gates future rollout.</p>
+            </div>
+          </div>
+          <div class="content has-text-justified architecture-figure">
+            <img src="scover/propose.png" alt="SCOVER architecture diagram" style="width: 100%;" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section demo-section">
+    <div class="container is-max-desktop">
+      <h2 class="title is-2 has-text-centered">Video Generation</h2>
+      <p class="demo-lead"><span class="task-label">Task:</span> Use robot grippers to pick up all spice bottles and place them into the left basket, and place all fruits into the right basket.</p>
+
+      <div class="demo-grid">
+        <div class="demo-card">
+          <div class="demo-card-header">
+            <span class="model-name">Cosmos2</span>
+            <span class="pill">+ SAVIOR</span>
+          </div>
+          <div class="demo-pair">
+            <div class="demo-video">
+              <video muted autoplay controls loop playsinline preload="metadata">
+                <source src="./scover/cosmos2_base.mp4" type="video/mp4">
+              </video>
+              <div class="demo-caption">Cosmos2</div>
+            </div>
+            <div class="demo-video">
+              <video muted autoplay controls loop playsinline preload="metadata">
+                <source src="./scover/cosmos2_propose.mp4" type="video/mp4">
+              </video>
+              <div class="demo-caption">Cosmos2 + SAVIOR</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="demo-card">
+          <div class="demo-card-header">
+            <span class="model-name">Wan 2.2</span>
+            <span class="pill">+ SAVIOR</span>
+          </div>
+          <div class="demo-pair">
+            <div class="demo-video">
+              <video muted autoplay controls loop playsinline preload="metadata">
+                <source src="./scover/wan2.2_base.mp4" type="video/mp4">
+              </video>
+              <div class="demo-caption">Wan 2.2</div>
+            </div>
+            <div class="demo-video">
+              <video muted autoplay controls loop playsinline preload="metadata">
+                <source src="./scover/wan2.2_propose.mp4" type="video/mp4">
+              </video>
+              <div class="demo-caption">Wan 2.2 + SAVIOR</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="demo-card">
+          <div class="demo-card-header">
+            <span class="model-name">Wan 2.6</span>
+            <span class="pill">+ SAVIOR</span>
+          </div>
+          <div class="demo-pair">
+            <div class="demo-video">
+              <video muted autoplay controls loop playsinline preload="metadata">
+                <source src="./scover/wan2.6_base.mp4" type="video/mp4">
+              </video>
+              <div class="demo-caption">Wan 2.6</div>
+            </div>
+            <div class="demo-video">
+              <video muted autoplay controls loop playsinline preload="metadata">
+                <source src="./scover/wan2.6_propose.mp4" type="video/mp4">
+              </video>
+              <div class="demo-caption">Wan 2.6 + SAVIOR</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="demo-card">
+          <div class="demo-card-header">
+            <span class="model-name">Veo 3.1</span>
+            <span class="pill">+ SAVIOR</span>
+          </div>
+          <div class="demo-pair">
+            <div class="demo-video">
+              <video muted autoplay controls loop playsinline preload="metadata">
+                <source src="./scover/veo3.1_base.mp4" type="video/mp4">
+              </video>
+              <div class="demo-caption">Veo 3.1</div>
+            </div>
+            <div class="demo-video">
+              <video muted autoplay controls loop playsinline preload="metadata">
+                <source src="./scover/veo3.1_propose.mp4" type="video/mp4">
+              </video>
+              <div class="demo-caption">Veo 3.1 + SAVIOR</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section demo-section demo-section-alt">
+    <div class="container is-max-desktop">
+      <h2 class="title is-2 has-text-centered">Run Time</h2>
+      <p class="demo-lead"><span class="task-label">Task:</span> Use robot grippers to pick up all objects and place all fruits into the right basket.</p>
+
+      <div class="demo-column-layout">
+        
+        <div class="demo-video-card terminal-crop">
+          <video muted autoplay controls loop playsinline preload="metadata">
+            <source src="./scover/demo_terminal_cut.mp4" type="video/mp4">
+          </video>
+          <div class="demo-caption">Terminal trace</div>
+        </div>
+
+        <div class="demo-video-card">
+          <video muted autoplay controls loop playsinline preload="metadata">
+            <source src="./scover/demo_video_cropped.mp4" type="video/mp4">
+          </video>
+          <div class="demo-caption">Closed-loop output</div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+ <!-- ========================================================= -->
+<!-- SCOVER: Recovery from Invalid Manipulation Transitions -->
+<!-- ========================================================= -->
+<!-- ========================================================= -->
+<!-- SCOVER: Recovery from Invalid Manipulation Transitions -->
+<!-- ========================================================= -->
+
+  <section class="section recovery-section">
+    <div class="container is-max-widescreen">
+
+      <!-- ================= Header ================= -->
+      <div class="has-text-centered mb-6">
+
+        <span class="recovery-tag">
+          Closed-Loop Verification
+        </span>
+
+        <h2 class="title is-2 recovery-title mt-3">
+          Recovery from invalid manipulation transitions
+        </h2>
+
+        <p class="recovery-description">
+          SAVIOR verifies transition consistency and dynamically re-plans
+          execution when manipulation deviates from task semantics.
+        </p>
+
+      </div>
+
+      <!-- ================= Main Demo ================= -->
+      <div class="columns is-variable is-4 is-align-stretch">
+
+        <!-- ================================================= -->
+        <!-- INVALID -->
+        <!-- ================================================= -->
+        <div class="column is-6">
+
+          <div class="demo-card invalid-card">
+
+            <!-- Header -->
+            <div class="demo-status invalid-status">
+              INVALID TRANSITION
+            </div>
+
+            <!-- Video -->
+            <video class="demo-video"
+                  muted autoplay loop playsinline controls preload="metadata">
+              <source src="./scover/fail_example.mp4" type="video/mp4">
+            </video>
+
+            <!-- Content -->
+            <div class="demo-body">
+
+              <!-- Task -->
+              <div class="task-box">
+                <div class="task-title">
+                  Task
+                </div>
+
+                <p>
+                  Pick all bottles into the basket.
+                </p>
+              </div>
+
+              <!-- Verification -->
+              <div class="analysis-box">
+
+                <div class="analysis-title">
+                  Verification Result
+                </div>
+
+                <div class="analysis-list">
+
+                  <div class="analysis-item invalid-item">
+
+                    <div class="analysis-icon invalid-icon">
+                      ✕
+                    </div>
+
+                    <div class="analysis-text">
+                      Left hand is far from the remaining target bottle
+                    </div>
+
+                  </div>
+
+                  <div class="analysis-item invalid-item">
+
+                    <div class="analysis-icon invalid-icon">
+                      ✕
+                    </div>
+
+                    <div class="analysis-text">
+                      Picks a nearby bottle already inside the basket
+                    </div>
+
+                  </div>
+
+                  <div class="analysis-item invalid-item">
+
+                    <div class="analysis-icon invalid-icon">
+                      ✕
+                    </div>
+
+                    <div class="analysis-text">
+                      Invalid task progression detected
+                    </div>
+
+                  </div>
+
+                </div>
+
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+        <!-- ================================================= -->
+        <!-- RECOVERY -->
+        <!-- ================================================= -->
+        <div class="column is-6">
+
+          <div class="demo-card valid-card">
+
+            <!-- Header -->
+            <div class="demo-status valid-status">
+              VERIFIED RECOVERY
+            </div>
+
+            <!-- Video -->
+            <video class="demo-video"
+                  muted autoplay loop playsinline controls preload="metadata">
+              <source src="./scover/recover_fail.mp4" type="video/mp4">
+            </video>
+
+            <!-- Content -->
+            <div class="demo-body">
+
+              <!-- Strategy -->
+              <div class="task-box">
+
+                <div class="task-title">
+                  Recovery Strategy
+                </div>
+
+                <p>
+                  Switch active gripper and refine manipulation trajectory.
+                </p>
+
+              </div>
+
+              <!-- Re-planning -->
+              <div class="analysis-box">
+
+                <div class="analysis-title">
+                  Re-planning Result
+                </div>
+
+                <div class="analysis-list">
+
+                  <div class="analysis-item valid-item">
+
+                    <div class="analysis-icon valid-icon">
+                      ✓
+                    </div>
+
+                    <div class="analysis-text">
+                      Right hand selected for better accessibility
+                    </div>
+
+                  </div>
+
+                  <div class="analysis-item valid-item">
+
+                    <div class="analysis-icon valid-icon">
+                      ✓
+                    </div>
+
+                    <div class="analysis-text">
+                      Correct target bottle successfully identified
+                    </div>
+
+                  </div>
+
+                  <div class="analysis-item valid-item">
+
+                    <div class="analysis-icon valid-icon">
+                      ✓
+                    </div>
+
+                    <div class="analysis-text">
+                      Verified rollout resumes successfully
+                    </div>
+
+                  </div>
+
+                </div>
+
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- ================= Recovery Behaviors ================= -->
+      <div class="distribution-box mt-6">
+
+        <div class="columns is-vcentered is-variable is-5">
+
+          <!-- Distribution Figure -->
+          <div class="column is-7">
+
+            <img src="./scover/distribution_RQ2.png"
+                alt="Recovery distribution"
+                class="distribution-image">
+
+          </div>
+
+          <!-- Behaviors -->
+          <div class="column is-5">
+
+            <div class="behavior-card">
+
+              <!-- Title -->
+              <h3 class="behavior-title">
+                Emergent Recovery Behaviors
+              </h3>
+
+              <p class="behavior-description">
+                Persistent verification enables adaptive recovery
+                under semantic and manipulation constraints.
+              </p>
+
+              <!-- Behaviors -->
+              <div class="behavior-list">
+
+                <!-- Strategy -->
+                <div class="behavior-item">
+
+                  <div class="behavior-icon strategy-icon">
+                    ↺
+                  </div>
+
+                  <div class="behavior-content">
+
+                    <div class="behavior-name">
+                      Strategy Change
+                    </div>
+
+                    <div class="behavior-text">
+                      Recover through adaptive re-planning, such as action re-ordering, decomposition refinement.
+                    </div>
+
+                  </div>
+
+                </div>
+
+                <!-- Embodiment -->
+                <div class="behavior-item">
+
+                  <div class="behavior-icon embodiment-icon">
+                    ✋
+                  </div>
+
+                  <div class="behavior-content">
+
+                    <div class="behavior-name">
+                      Tool Selection
+                    </div>
+
+                    <div class="behavior-text">
+                      Switch active manipulator for improved reachability.
+                    </div>
+
+                  </div>
+
+                </div>
+
+                <!-- Instruction -->
+                <div class="behavior-item">
+
+                  <div class="behavior-icon instruction-icon">
+                    ✎
+                  </div>
+
+                  <div class="behavior-content">
+
+                    <div class="behavior-name">
+                      Instruction Refinement
+                    </div>
+
+                    <div class="behavior-text">
+                      Refine task specification to reduce ambiguity.
+                    </div>
+
+                  </div>
+
+                </div>
+
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+
+
+<!-- ========================================================= -->
+<!-- Suggested CSS Refinement -->
+<!-- ========================================================= -->
+
+<style>
+.recovery-section .demo-card {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.recovery-section .demo-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+</style>
+  <section class="section demo-section demo-section-alt">
+    <div class="container is-max-desktop">
+      <h2 class="title is-2 has-text-centered">Video to Sim</h2>
+      <p class="demo-lead">The same task is shown across generation, simulation, and the real-world replay.</p>
+
+      <div class="demo-triple">
+        <div class="demo-video">
+          <video muted autoplay controls loop playsinline preload="metadata">
+            <source src="./scover/test_5_propose_fast_cropped.mp4" type="video/mp4">
+          </video>
+          <div class="demo-caption">Video generation</div>
+        </div>
+        <div class="demo-video">
+          <video muted autoplay controls loop playsinline preload="metadata">
+            <source src="./scover/sim.webm" type="video/webm">
+          </video>
+          <div class="demo-caption">Video simulation</div>
+        </div>
+        <div class="demo-video">
+          <video muted autoplay controls loop playsinline preload="metadata">
+            <source src="./videos/hi.mp4" type="video/mp4">
+          </video>
+          <div class="demo-caption">Real robot</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <section>
+    <div class="container">
+        <br>
+        <h2 class="title is-3">BibTeX</h2>
+        <pre><code>@article{,
+    title={SAVIOR: State-Guided Verified Rollouts for Long-Horizon Video Generation in Robotic Manipulation},
+    author={},
+    booktitle={},
+    year={2026}
+    }</code></pre>
+        </div>
+  </section>
+
+
+  <footer class="footer">
+    <div class="container">
+      <div class="columns is-centered">
+        <div class="column is-8">
+          <div class="content">
+            <p>
+              This website template is borrowed from <a href="https://github.com/nerfies/nerfies.github.io">Here</a>.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+</body>
+
+</html>
