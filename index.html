@@ -61,7 +61,7 @@
         <div class="columns is-centered">
           <div class="column has-text-centered">
               <h1 class="title is-2 publication-title" style="background: linear-gradient(90deg, #46b1f0 0%, #9b59b6 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">
-                SAVIOR: State-Guided Verified Rollouts for Long-Horizon Video Generation in Robotic Manipulation
+                SAVIOR: State-guided Augmented Verification for Iterative Observation Rollouts for Long-Horizon Video Generation in Robotic Manipulation
               </h1>
             <div class="is-size-5 publication-authors">
               <span class="author-block">
@@ -108,6 +108,43 @@
   </section>
 
 
+  <section class="section highlights-section">
+    <div class="container is-max-desktop">
+      <div class="ki">
+        <p class="ki-label">In brief</p>
+        <h2 class="ki-lead">
+          Long tasks fail when the model improvises the whole video at once.
+          <em>SAVIOR rebuilds the plan as the scene changes.</em>
+        </h2>
+        <p class="ki-body">
+          After every short clip, it checks whether the robot actually made progress.
+          Only then does it <strong>dynamically choose the next subgoal</strong> from the verified scene—
+          so one early mistake cannot silently ruin the rest of the task.
+        </p>
+
+        <div class="ki-results">
+          <div class="ki-stat">
+            <div class="ki-stat-n">+0.15–0.19</div>
+            <div class="ki-stat-d">RBench quality (structure, physics &amp; action completeness) across 4 generators</div>
+          </div>
+          <div class="ki-stat">
+            <div class="ki-stat-n">+15–25<span>pts</span></div>
+            <div class="ki-stat-d">Task completion rate—did the final scene match the instruction?</div>
+          </div>
+          <div class="ki-stat">
+            <div class="ki-stat-n">~88<span>%</span></div>
+            <div class="ki-stat-d">Mid-task mistakes recovered before they cascade</div>
+          </div>
+          <div class="ki-stat">
+            <div class="ki-stat-n">30→80<span>%</span></div>
+            <div class="ki-stat-d">Physical success on humanoid (IDM actions from generated video)</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
   <section class="section content-section">
     <div class="container is-max-desktop">
       <div class="columns is-centered has-text-centered">
@@ -115,13 +152,7 @@
           <h2 class="title is-3">Abstract</h2>
           <div class="content has-text-justified">
             <p style="font-size: 1.2rem; line-height: 1.8;">
-            Recent advances in video generation have enabled scalable synthesis of robotic manipulation trajectories directly from task instructions. However, existing approaches remain unreliable for long-horizon manipulation because trajectory generation is performed through open-loop autoregressive rollout, where locally inconsistent transitions recursively corrupt future task evolution despite visually plausible intermediate motions. This limitation is particularly critical in robotics, where successful execution depends not only on visual realism, but on preserving executable interaction consistency across extended temporal horizons. We therefore reformulate robotic video generation as verified executable state evolution and propose 
-            <strong>SAVIOR</strong>: 
-            <span style="text-decoration: underline;">S</span>t<span style="text-decoration: underline;">a</span>te-Guided 
-            <span style="text-decoration: underline;">V</span>erified Rollouts for Long-Horizon 
-            V<span style="text-decoration: underline;">i</span>deo Generati<span style="text-decoration: underline;">o</span>n in 
-            <span style="text-decoration: underline;">R</span>obotic Manipulation, 
-            a closed-loop framework that incrementally constructs manipulation trajectories through sequential planning, task-conditioned generation, transition verification, and persistent rollout tracking. Instead of directly propagating generated observations through autoregressive continuation, <strong>SAVIOR</strong> verifies each intermediate transition before rollout propagation, preventing invalid interactions and infeasible task progression from destabilizing downstream generation. Furthermore, <strong>SAVIOR</strong> performs verification at the level of manipulation state transitions rather than dense frame realism, aligning rollout evaluation with executable interaction consistency. Across diverse video generators and long-horizon manipulation tasks, <strong>SAVIOR</strong> consistently improves compositional task completion, interaction consistency, and rollout executability. Our analysis further shows that many long-horizon failures arise not from catastrophic generation collapse, but from the accumulation of locally inconsistent transitions during rollout evolution, highlighting the importance of verified state-guided rollout for reliable robotic video generation.
+            Recent video generation models provide a scalable source of manipulation experience from language instructions, which is particularly valuable for humanoid robots whose long-horizon demonstrations are costly to collect. However, visual plausibility alone is insufficient for robot learning: a locally inconsistent interaction can invalidate the task state and corrupt all subsequent actions. We identify accumulated transition errors, rather than generation capacity alone, as a key bottleneck in long-horizon robotic video generation. We present <strong>SAVIOR</strong> (<span style="text-decoration: underline;">S</span>tate-Guided <span style="text-decoration: underline;">A</span>ugmented <span style="text-decoration: underline;">V</span>erification for <span style="text-decoration: underline;">I</span>terative <span style="text-decoration: underline;">O</span>bservation <span style="text-decoration: underline;">R</span>ollouts for Long-Horizon Video Generation in Robotic Manipulation), a closed-loop framework that reformulates video generation as the recursive evolution of a verified task state. Instead of autoregressively propagating every generated transition, <strong>SAVIOR</strong> maintains explicit awareness of task progress, validates whether each transition advances the manipulation objective while preserving previously verified states, and regenerates failed segments before they corrupt future rollout. Across open-source and commercial video generators, <strong>SAVIOR</strong> consistently improves long-horizon, spatial, and semantic manipulation tasks while enabling more reliable action recovery and humanoid execution. Our analysis further reveals that many rollout failures are local and recoverable, underscoring the importance of verified task progression for scalable generation of executable manipulation experience.
             </p>
           </div>
         </div>
@@ -258,259 +289,80 @@
     </div>
   </section>
 
-  <section class="section demo-section demo-section-alt">
+  <section class="section runtime-section">
     <div class="container is-max-desktop">
-      <h2 class="title is-2 has-text-centered">Run Time</h2>
-      <p class="demo-lead"><span class="task-label">Task:</span> Use robot grippers to pick up all objects and place all fruits into the right basket.</p>
 
-      <div class="demo-column-layout">
-        
-        <div class="demo-video-card terminal-crop">
-          <video muted autoplay controls loop playsinline preload="metadata">
-            <source src="./scover/demo_terminal_cut.mp4" type="video/mp4">
-          </video>
-          <div class="demo-caption">Terminal trace</div>
-        </div>
-
-        <div class="demo-video-card">
-          <video muted autoplay controls loop playsinline preload="metadata">
-            <source src="./scover/demo_video_cropped.mp4" type="video/mp4">
-          </video>
-          <div class="demo-caption">Closed-loop output</div>
-        </div>
-
-      </div>
-    </div>
-  </section>
- <!-- ========================================================= -->
-<!-- SCOVER: Recovery from Invalid Manipulation Transitions -->
-<!-- ========================================================= -->
-<!-- ========================================================= -->
-<!-- SCOVER: Recovery from Invalid Manipulation Transitions -->
-<!-- ========================================================= -->
-
-  <section class="section recovery-section">
-    <div class="container is-max-widescreen">
-
-      <!-- ================= Header ================= -->
-      <div class="has-text-centered mb-6">
-
-        <span class="recovery-tag">
-          Closed-Loop Verification
-        </span>
-
-        <h2 class="title is-2 recovery-title mt-3">
-          Recovery from invalid manipulation transitions
-        </h2>
-
-        <p class="recovery-description">
-          SAVIOR verifies transition consistency and dynamically re-plans
-          execution when manipulation deviates from task semantics.
+      <div class="has-text-centered">
+        <span class="runtime-tag">Closed-Loop Execution</span>
+        <h2 class="title is-2 runtime-title">Runtime verification &amp; dynamic recovery</h2>
+        <p class="runtime-lead">
+          Long-horizon failures rarely arrive as a single collapse.
+          They accumulate as locally invalid transitions.
+          SAVIOR catches those transitions at runtime, regenerates the failed segment,
+          and resumes from the last verified task state—before the error poisons the rest of the rollout.
         </p>
-
       </div>
 
-      <!-- ================= Main Demo ================= -->
-      <div class="columns is-variable is-4 is-align-stretch">
-
-        <!-- ================================================= -->
-        <!-- INVALID -->
-        <!-- ================================================= -->
-        <div class="column is-6">
-
-          <div class="demo-card invalid-card">
-
-            <!-- Header -->
-            <div class="demo-status invalid-status">
-              INVALID TRANSITION
-            </div>
-
-            <!-- Video -->
-            <video class="demo-video"
-                  muted autoplay loop playsinline controls preload="metadata">
-              <source src="./scover/fail_example.mp4" type="video/mp4">
-            </video>
-
-            <!-- Content -->
-            <div class="demo-body">
-
-              <!-- Task -->
-              <div class="task-box">
-                <div class="task-title">
-                  Task
-                </div>
-
-                <p>
-                  Pick all bottles into the basket.
-                </p>
-              </div>
-
-              <!-- Verification -->
-              <div class="analysis-box">
-
-                <div class="analysis-title">
-                  Verification Result
-                </div>
-
-                <div class="analysis-list">
-
-                  <div class="analysis-item invalid-item">
-
-                    <div class="analysis-icon invalid-icon">
-                      ✕
-                    </div>
-
-                    <div class="analysis-text">
-                      Left hand is far from the remaining target bottle
-                    </div>
-
-                  </div>
-
-                  <div class="analysis-item invalid-item">
-
-                    <div class="analysis-icon invalid-icon">
-                      ✕
-                    </div>
-
-                    <div class="analysis-text">
-                      Picks a nearby bottle already inside the basket
-                    </div>
-
-                  </div>
-
-                  <div class="analysis-item invalid-item">
-
-                    <div class="analysis-icon invalid-icon">
-                      ✕
-                    </div>
-
-                    <div class="analysis-text">
-                      Invalid task progression detected
-                    </div>
-
-                  </div>
-
-                </div>
-
-              </div>
-
-            </div>
-
-          </div>
-
+      <div class="runtime-stage">
+        <div class="runtime-stage-bar">
+          <span class="runtime-live-dot" aria-hidden="true"></span>
+          <span class="runtime-stage-label">Live recovery trace</span>
+          <span class="runtime-stage-meta">detect → reject → replan → resume</span>
         </div>
 
-        <!-- ================================================= -->
-        <!-- RECOVERY -->
-        <!-- ================================================= -->
-        <div class="column is-6">
-
-          <div class="demo-card valid-card">
-
-            <!-- Header -->
-            <div class="demo-status valid-status">
-              VERIFIED RECOVERY
-            </div>
-
-            <!-- Video -->
-            <video class="demo-video"
-                  muted autoplay loop playsinline controls preload="metadata">
-              <source src="./scover/recover_fail.mp4" type="video/mp4">
-            </video>
-
-            <!-- Content -->
-            <div class="demo-body">
-
-              <!-- Strategy -->
-              <div class="task-box">
-
-                <div class="task-title">
-                  Recovery Strategy
-                </div>
-
-                <p>
-                  Switch active gripper and refine manipulation trajectory.
-                </p>
-
-              </div>
-
-              <!-- Re-planning -->
-              <div class="analysis-box">
-
-                <div class="analysis-title">
-                  Re-planning Result
-                </div>
-
-                <div class="analysis-list">
-
-                  <div class="analysis-item valid-item">
-
-                    <div class="analysis-icon valid-icon">
-                      ✓
-                    </div>
-
-                    <div class="analysis-text">
-                      Right hand selected for better accessibility
-                    </div>
-
-                  </div>
-
-                  <div class="analysis-item valid-item">
-
-                    <div class="analysis-icon valid-icon">
-                      ✓
-                    </div>
-
-                    <div class="analysis-text">
-                      Correct target bottle successfully identified
-                    </div>
-
-                  </div>
-
-                  <div class="analysis-item valid-item">
-
-                    <div class="analysis-icon valid-icon">
-                      ✓
-                    </div>
-
-                    <div class="analysis-text">
-                      Verified rollout resumes successfully
-                    </div>
-
-                  </div>
-
-                </div>
-
-              </div>
-
-            </div>
-
-          </div>
-
+        <div class="runtime-video-wrap">
+          <video muted autoplay controls loop playsinline preload="metadata">
+            <source src="./scover/recovery_trace.mp4" type="video/mp4">
+          </video>
         </div>
 
+        <p class="runtime-caption">
+          <span class="task-label">Task:</span>
+          Pick up all objects and place all fruits into the right basket—
+          with on-the-fly recovery when a generated transition violates task progress.
+        </p>
       </div>
 
-      <!-- ================= Recovery Behaviors ================= -->
-      <div class="distribution-box mt-6">
+      <div class="runtime-insight-grid">
+        <div class="runtime-insight">
+          <div class="runtime-insight-kicker">01 · Detect</div>
+          <h3>Transition-level checks</h3>
+          <p>
+            Each generated step is validated against verified task progress rather than visual realism alone.
+          </p>
+        </div>
+        <div class="runtime-insight">
+          <div class="runtime-insight-kicker">02 · Isolate</div>
+          <h3>Local errors stay local</h3>
+          <p>
+            Failed segments are discarded before they enter state memory,
+            so one bad grasp cannot silently rewrite the entire horizon.
+          </p>
+        </div>
+        <div class="runtime-insight">
+          <div class="runtime-insight-kicker">03 · Recover</div>
+          <h3>Replan from a clean state</h3>
+          <p>
+            SAVIOR regenerates from the last accepted observation,
+            restoring executable continuity instead of continuing a corrupted rollout.
+          </p>
+        </div>
+      </div>
+
+      <!-- Emergent Recovery Behaviors -->
+      <div class="distribution-box runtime-behaviors">
 
         <div class="columns is-vcentered is-variable is-5">
 
-          <!-- Distribution Figure -->
           <div class="column is-7">
-
             <img src="./scover/distribution_RQ2.png"
                 alt="Recovery distribution"
                 class="distribution-image">
-
           </div>
 
-          <!-- Behaviors -->
           <div class="column is-5">
-
             <div class="behavior-card">
 
-              <!-- Title -->
               <h3 class="behavior-title">
                 Emergent Recovery Behaviors
               </h3>
@@ -520,128 +372,111 @@
                 under semantic and manipulation constraints.
               </p>
 
-              <!-- Behaviors -->
               <div class="behavior-list">
 
-                <!-- Strategy -->
                 <div class="behavior-item">
-
-                  <div class="behavior-icon strategy-icon">
-                    ↺
-                  </div>
-
+                  <div class="behavior-icon strategy-icon">↺</div>
                   <div class="behavior-content">
-
-                    <div class="behavior-name">
-                      Strategy Change
-                    </div>
-
+                    <div class="behavior-name">Strategy Change</div>
                     <div class="behavior-text">
                       Recover through adaptive re-planning, such as action re-ordering, decomposition refinement.
                     </div>
-
                   </div>
-
                 </div>
 
-                <!-- Embodiment -->
                 <div class="behavior-item">
-
-                  <div class="behavior-icon embodiment-icon">
-                    ✋
-                  </div>
-
+                  <div class="behavior-icon embodiment-icon">✋</div>
                   <div class="behavior-content">
-
-                    <div class="behavior-name">
-                      Tool Selection
-                    </div>
-
+                    <div class="behavior-name">Tool Selection</div>
                     <div class="behavior-text">
                       Switch active manipulator for improved reachability.
                     </div>
-
                   </div>
-
                 </div>
 
-                <!-- Instruction -->
                 <div class="behavior-item">
-
-                  <div class="behavior-icon instruction-icon">
-                    ✎
-                  </div>
-
+                  <div class="behavior-icon instruction-icon">✎</div>
                   <div class="behavior-content">
-
-                    <div class="behavior-name">
-                      Instruction Refinement
-                    </div>
-
+                    <div class="behavior-name">Instruction Refinement</div>
                     <div class="behavior-text">
                       Refine task specification to reduce ambiguity.
                     </div>
-
                   </div>
-
                 </div>
 
               </div>
-
             </div>
-
           </div>
 
         </div>
-
       </div>
+
+      <p class="runtime-takeaway">
+        <strong>Key insight.</strong>
+        The bottleneck in long-horizon robotic video generation is not synthesis capacity,
+        but <em>accumulated transition error</em>.
+        Once each step is gated by verified task progress, recovery stops being an afterthought—
+        it emerges as strategy change, tool selection, and instruction refinement,
+        turning locally invalid motions into recoverable control events rather than irreversible rollout collapse.
+      </p>
 
     </div>
   </section>
 
-
-
-<!-- ========================================================= -->
-<!-- Suggested CSS Refinement -->
-<!-- ========================================================= -->
-
-<style>
-.recovery-section .demo-card {
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-}
-.recovery-section .demo-body {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-}
-</style>
-  <section class="section demo-section demo-section-alt">
+  <section class="section v2r-section">
     <div class="container is-max-desktop">
-      <h2 class="title is-2 has-text-centered">Video to Sim</h2>
-      <p class="demo-lead">The same task is shown across generation, simulation, and the real-world replay.</p>
+      <h2 class="title is-2 has-text-centered">Video to Real</h2>
+      <p class="demo-lead"><span class="task-label">Task:</span> Pick all objects.</p>
 
-      <div class="demo-triple">
-        <div class="demo-video">
-          <video muted autoplay controls loop playsinline preload="metadata">
-            <source src="./scover/test_5_propose_fast_cropped.mp4" type="video/mp4">
-          </video>
-          <div class="demo-caption">Video generation</div>
+      <div class="v2r-pipeline">
+        <div class="v2r-step">
+          <div class="v2r-step-header">
+            <span class="v2r-step-num">01</span>
+            <span class="v2r-step-title">SAVIOR-generated video</span>
+          </div>
+          <div class="v2r-video-wrap">
+            <video muted autoplay controls loop playsinline preload="metadata">
+              <source src="./scover/real_robot_gen.mp4" type="video/mp4">
+            </video>
+          </div>
+          <p class="v2r-step-caption">Verified long-horizon rollout from video generation</p>
         </div>
-        <div class="demo-video">
-          <video muted autoplay controls loop playsinline preload="metadata">
-            <source src="./scover/sim.webm" type="video/webm">
-          </video>
-          <div class="demo-caption">Video simulation</div>
+
+        <div class="v2r-arrow" aria-hidden="true">
+          <span class="v2r-arrow-line"></span>
+          <span class="v2r-arrow-label">IDM → robot</span>
+          <span class="v2r-arrow-head">→</span>
         </div>
-        <div class="demo-video">
-          <video muted autoplay controls loop playsinline preload="metadata">
-            <source src="./videos/hi.mp4" type="video/mp4">
-          </video>
-          <div class="demo-caption">Real robot</div>
+
+        <div class="v2r-step">
+          <div class="v2r-step-header">
+            <span class="v2r-step-num">02</span>
+            <span class="v2r-step-title">Egocentric view (real humanoid)</span>
+          </div>
+          <div class="v2r-video-wrap">
+            <video muted autoplay controls loop playsinline preload="metadata">
+              <source src="./scover/egocentric_real.mp4" type="video/mp4">
+            </video>
+          </div>
+          <p class="v2r-step-caption">Physical execution from recovered actions</p>
         </div>
       </div>
+
+      <div class="v2r-external">
+        <div class="v2r-external-header">
+          <span class="v2r-external-label">External view</span>
+        </div>
+        <div class="v2r-video-wrap v2r-video-wrap-wide">
+          <video muted autoplay controls loop playsinline preload="metadata">
+            <source src="./scover/real_robot.mp4" type="video/mp4">
+          </video>
+        </div>
+      </div>
+
+      <p class="v2r-footnote">
+        Same task, same IDM and controller—only the source video changes.
+        SAVIOR improves both video-level completion and physical execution on hardware.
+      </p>
     </div>
   </section>
 
@@ -651,7 +486,7 @@
         <br>
         <h2 class="title is-3">BibTeX</h2>
         <pre><code>@article{,
-    title={SAVIOR: State-Guided Verified Rollouts for Long-Horizon Video Generation in Robotic Manipulation},
+    title={SAVIOR: State-guided Augmented Verification for Iterative Observation Rollouts for Long-Horizon Video Generation in Robotic Manipulation},
     author={},
     booktitle={},
     year={2026}
