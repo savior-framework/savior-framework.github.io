@@ -8,6 +8,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>SAVIOR</title>
 
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Instrument+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
 
   <link rel="stylesheet" href="./static/css/bulma.min.css">
@@ -26,133 +27,148 @@
 
 <body>
 
-  <nav class="navbar" role="navigation" aria-label="main navigation">
-    <div class="navbar-brand">
-      <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
-        <span aria-hidden="true"></span>
-        <span aria-hidden="true"></span>
-        <span aria-hidden="true"></span>
+  <nav class="site-nav" aria-label="Primary">
+    <div class="site-nav-inner">
+      <a class="site-wordmark" href="#top">
+        <span class="site-pin">S</span>
+        SAVIOR
       </a>
-    </div>
-    <div class="navbar-menu">
-      <div class="navbar-start" style="flex-grow: 1; justify-content: center;">
-        <a class="navbar-item" href="">
-        <span class="icon">
-            <i class="fas fa-home"></i>
-        </span>
-        </a>
-        <div class="navbar-item has-dropdown is-hoverable">
-          <a class="navbar-link">
-            More Related Research
-          </a>
-          <div class="navbar-dropdown">
-         
-          </div>
-        </div>
+      <div class="site-nav-links">
+        <a href="#overview">Overview</a>
+        <a href="#motivation">Motivation</a>
+        <a href="#architecture">Architecture</a>
+        <a href="#generation">Generation</a>
+        <a href="#recovery">Recovery</a>
+        <a href="#real">Real</a>
+        <a href="#bibtex">BibTeX</a>
       </div>
     </div>
   </nav>
 
+  <header class="savior-hero" id="top">
+    <div class="container is-max-widescreen">
+      <div class="hero-eyebrow"><span class="dot"></span>Humanoids 2026 · Under Review</div>
+      <h1 class="hero-title">
+        SAVIOR: State-guided Augmented Verification for Iterative Observation Rollouts for Long-Horizon Video Generation in Robotic Manipulation
+      </h1>
+      <p class="hero-subtitle">
+        Verified video in, executable humanoid behavior out—without letting one bad transition poison the task.
+      </p>
+      <p class="hero-authors">Anonymous Authors</p>
+
+      <div class="cta-row">
+        <a class="btn btn-primary" href="#">
+          <i class="ai ai-arxiv"></i>
+          arXiv <span class="soon">soon</span>
+        </a>
+        <a class="btn btn-ghost" href="#generation">
+          <i class="fas fa-play"></i>
+          Demos
+        </a>
+        <a class="btn btn-ghost" href="#">
+          <i class="fab fa-github"></i>
+          Code <span class="soon">soon</span>
+        </a>
+      </div>
+    </div>
+  </header>
 
 
-  <section class="hero">
-    <div class="hero-body">
-      <div class="container is-max-desktop">
-        <div class="columns is-centered">
-          <div class="column has-text-centered">
-              <h1 class="title is-2 publication-title" style="background: linear-gradient(90deg, #46b1f0 0%, #9b59b6 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">
-                SAVIOR: State-guided Augmented Verification for Iterative Observation Rollouts for Long-Horizon Video Generation in Robotic Manipulation
-              </h1>
-            <div class="is-size-5 publication-authors">
-              <span class="author-block">
-                  Anonymous Authors
-              </span>
+  <section class="section overview-section" id="overview">
+    <div class="container is-max-widescreen">
+      <div class="overview-wrap">
+        <div class="sec-head">
+          <div class="sec-eyebrow">Overview</div>
+          <h2 class="sec-title">From verified video to real humanoid execution</h2>
+          <p class="sec-lede">
+            One closed loop: progress-aware planning, transition verification, and recovery—
+            then IDM turns the accepted rollout into physical actions.
+          </p>
+        </div>
 
-            </div>
+        <figure class="overview-figure">
+          <img src="./scover/image/savior_overview.jpg"
+               alt="SAVIOR overview: verified video generation, closed-loop framework, and real humanoid execution">
+          <figcaption class="overview-caption">
+            SAVIOR generates manipulation video from an initial frame and instruction via
+            progress-aware planning, verification, and recovery.
+            An inverse dynamics model (IDM) then recovers actions for real-world execution.
+          </figcaption>
+        </figure>
 
-          <br>
-
-          <div class="columns is-centered has-text-centered">
-            <div class="publication-links">
-              <span class="link-block">
-                <span class="external-link button is-normal is-rounded is-dark">
-                  <span class="icon">
-                    <i class="ai ai-arxiv"></i>
-                  </span>
-                  <span>arXiv</span>
-                </span>
-              </span>
-                            <span class="link-block">
-                              <span class="external-link button is-normal is-rounded is-dark">
-                                <span class="icon">
-                                  <i class="fab fa-youtube"></i>
-                                </span>
-                                <span>Video</span>
-                              </span>
-                            </span>
-
-              <span class="link-block">
-                <span class="external-link button is-normal is-rounded is-dark">
-                  <span class="icon">
-                    <i class="fab fa-github"></i>
-                  </span>
-                  <span>Code (coming soon)</span>
-                </span>
-              </span>
-            </div>
-          </div>
-          </div>
+        <div class="overview-pills">
+          <span>Progress-aware planning</span>
+          <span>Task-state memory</span>
+          <span>Verified transitions</span>
+          <span>Feedback-guided recovery</span>
         </div>
       </div>
     </div>
   </section>
 
 
-  <section class="section highlights-section">
-    <div class="container is-max-desktop">
-      <div class="ki">
-        <p class="ki-label">In brief</p>
-        <h2 class="ki-lead">
-          Long tasks fail when the model improvises the whole video at once.
-          <em>SAVIOR rebuilds the plan as the scene changes.</em>
-        </h2>
-        <p class="ki-body">
-          After every short clip, it checks whether the robot actually made progress.
-          Only then does it <strong>dynamically choose the next subgoal</strong> from the verified scene—
-          so one early mistake cannot silently ruin the rest of the task.
+  <section class="section highlights-section" id="brief">
+    <div class="container is-max-widescreen">
+      <div class="sec-head">
+        <div class="sec-eyebrow">In brief</div>
+        <h2 class="sec-title">Long tasks fail when generation outruns verification</h2>
+        <p class="sec-lede">
+          SAVIOR rebuilds the plan from the verified scene after every short clip—
+          so early mistakes stay local instead of cascading.
         </p>
+      </div>
 
-        <div class="ki-results">
-          <div class="ki-stat">
-            <div class="ki-stat-n">+0.15–0.19</div>
-            <div class="ki-stat-d">RBench quality (structure, physics &amp; action completeness) across 4 generators</div>
-          </div>
-          <div class="ki-stat">
-            <div class="ki-stat-n">+15–25<span>pts</span></div>
-            <div class="ki-stat-d">Task completion rate—did the final scene match the instruction?</div>
-          </div>
-          <div class="ki-stat">
-            <div class="ki-stat-n">~88<span>%</span></div>
-            <div class="ki-stat-d">Mid-task mistakes recovered before they cascade</div>
-          </div>
-          <div class="ki-stat">
-            <div class="ki-stat-n">30→80<span>%</span></div>
-            <div class="ki-stat-d">Physical success on humanoid (IDM actions from generated video)</div>
-          </div>
+      <div class="hero-stats">
+        <div class="hero-stat">
+          <div class="hero-stat-n">+0.15–0.19</div>
+          <div class="hero-stat-d">RBench quality across 4 generators</div>
         </div>
+        <div class="hero-stat">
+          <div class="hero-stat-n">15–25<span>%</span></div>
+          <div class="hero-stat-d">Task completion rate gain</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-n">~88<span>%</span></div>
+          <div class="hero-stat-d">Mid-task mistakes recovered</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-n">30→80<span>%</span></div>
+          <div class="hero-stat-d">Real-humanoid execution success</div>
+        </div>
+      </div>
+
+      <div class="gap-grid">
+        <article class="gap-card" style="--accent:#1A5FD6">
+          <div class="gap-tag">Gap 01 · Rollout</div>
+          <h3>One bad frame poisons the rest</h3>
+          <p class="problem">Open-loop video keeps generating even after an invalid grasp or wrong object—corrupting every later step.</p>
+          <p class="solution"><b>Our answer:</b> reject failed transitions before they enter state memory; resume from the last verified observation.</p>
+        </article>
+        <article class="gap-card" style="--accent:#6D4FC4">
+          <div class="gap-tag">Gap 02 · Planning</div>
+          <h3>Frozen plans can’t track progress</h3>
+          <p class="problem">A fixed open-loop decomposition cannot adapt when the scene changes mid-task.</p>
+          <p class="solution"><b>Our answer:</b> dynamically choose the next subgoal from verified task state—not a predetermined script.</p>
+        </article>
+        <article class="gap-card" style="--accent:#0E9F6E">
+          <div class="gap-tag">Gap 03 · Execution</div>
+          <h3>Pretty video ≠ executable actions</h3>
+          <p class="problem">Visually plausible clips still fail on hardware when intermediate contacts are inconsistent.</p>
+          <p class="solution"><b>Our answer:</b> verified progression yields cleaner IDM-recovered actions and stronger real-humanoid success.</p>
+        </article>
       </div>
     </div>
   </section>
 
 
-  <section class="section content-section">
-    <div class="container is-max-desktop">
+  <section class="section content-section" id="abstract">
+    <div class="container is-max-widescreen">
       <div class="columns is-centered has-text-centered">
         <div class="column is-full-width">
           <h2 class="title is-3">Abstract</h2>
           <div class="content has-text-justified">
-            <p style="font-size: 1.2rem; line-height: 1.8;">
-            Recent video generation models provide a scalable source of manipulation experience from language instructions, which is particularly valuable for humanoid robots whose long-horizon demonstrations are costly to collect. However, visual plausibility alone is insufficient for robot learning: a locally inconsistent interaction can invalidate the task state and corrupt all subsequent actions. We identify accumulated transition errors, rather than generation capacity alone, as a key bottleneck in long-horizon robotic video generation. We present <strong>SAVIOR</strong> (<span style="text-decoration: underline;">S</span>tate-Guided <span style="text-decoration: underline;">A</span>ugmented <span style="text-decoration: underline;">V</span>erification for <span style="text-decoration: underline;">I</span>terative <span style="text-decoration: underline;">O</span>bservation <span style="text-decoration: underline;">R</span>ollouts for Long-Horizon Video Generation in Robotic Manipulation), a closed-loop framework that reformulates video generation as the recursive evolution of a verified task state. Instead of autoregressively propagating every generated transition, <strong>SAVIOR</strong> maintains explicit awareness of task progress, validates whether each transition advances the manipulation objective while preserving previously verified states, and regenerates failed segments before they corrupt future rollout. Across open-source and commercial video generators, <strong>SAVIOR</strong> consistently improves long-horizon, spatial, and semantic manipulation tasks while enabling more reliable action recovery and humanoid execution. Our analysis further reveals that many rollout failures are local and recoverable, underscoring the importance of verified task progression for scalable generation of executable manipulation experience.
+            <p style="font-size: 1.35rem; line-height: 1.85;">
+              Recent video generation models provide a scalable source of synthesis data for robotic manipulation, which is particularly valuable for humanoid robots whose long-horizon demonstrations are costly to collect. However, visual plausibility alone is insufficient for robot learning: a locally inconsistent interaction can invalidate the task state and corrupt all subsequent actions. We identify accumulated transition errors, rather than generation capacity alone, as a key bottleneck in long-horizon robotic video generation. We present <strong>SAVIOR</strong> (<strong><span style="text-decoration: underline;">S</span></strong>tate-Guided <strong><span style="text-decoration: underline;">A</span></strong>ugmented <strong><span style="text-decoration: underline;">V</span></strong>erification for <strong><span style="text-decoration: underline;">I</span></strong>terative <strong><span style="text-decoration: underline;">O</span></strong>bservation <strong><span style="text-decoration: underline;">R</span></strong>ollouts), a closed-loop framework that reformulates video generation as the recursive evolution of a verified task state. Instead of autoregressively propagating every generated transition, <strong>SAVIOR</strong> maintains explicit awareness of task progress, validates whether each transition advances the manipulation objective while preserving previously verified states, and regenerates failed segments before they corrupt future rollout. Across open-source and commercial video generators, <strong>SAVIOR</strong> consistently improves long-horizon, spatial, and semantic manipulation tasks while enabling more reliable action recovery and humanoid execution. Our analysis further reveals that many rollout failures are local and recoverable, underscoring the importance of verified task progression for scalable generation of executable manipulation experience.
             </p>
           </div>
         </div>
@@ -161,15 +177,126 @@
   </section>
 
 
-  <section class="section content-section">
-    <div class="container is-max-desktop">
+  <section class="section mot-section" id="motivation">
+    <div class="container is-max-widescreen">
+
+      <div class="sec-head">
+        <div class="sec-eyebrow">Motivation</div>
+        <h2 class="sec-title">Visual realism is not task correctness</h2>
+        <p class="sec-lede">
+          Open-loop generators look plausible until one wrong selection corrupts the instruction.
+          The bottleneck is unverified task progress—not generation capacity.
+        </p>
+        <p class="mot-task">
+          <span class="task-label">Task:</span>
+          Place all bottles into the basket—except the yellow one.
+        </p>
+      </div>
+
+      <div class="mot-videos">
+        <div class="mot-videos-fail">
+          <article class="mot-card mot-card-fail">
+            <div class="mot-card-top">
+              <span class="mot-badge mot-badge-fail">Fail</span>
+              <span class="mot-card-hint">Ignores the exception</span>
+            </div>
+            <div class="mot-video-wrap">
+              <video muted autoplay controls loop playsinline preload="metadata">
+                <source src="./scover/motivation/wrong_motivation_all.mp4" type="video/mp4">
+              </video>
+            </div>
+            <p class="mot-card-caption">Places <em>every</em> bottle—including yellow.</p>
+          </article>
+
+          <article class="mot-card mot-card-fail">
+            <div class="mot-card-top">
+              <span class="mot-badge mot-badge-fail">Fail</span>
+              <span class="mot-card-hint">Wrong selection</span>
+            </div>
+            <div class="mot-video-wrap">
+              <video muted autoplay controls loop playsinline preload="metadata">
+                <source src="./scover/motivation/wrong_motivation_2.mp4" type="video/mp4">
+              </video>
+            </div>
+            <p class="mot-card-caption">Picks yellow; leaves red behind.</p>
+          </article>
+        </div>
+
+        <article class="mot-card mot-card-ok mot-card-success">
+          <div class="mot-card-top">
+            <span class="mot-badge mot-badge-ok">Success</span>
+            <span class="mot-card-hint">Constraint respected</span>
+          </div>
+          <div class="mot-video-wrap">
+            <video muted autoplay controls loop playsinline preload="metadata">
+              <source src="./scover/motivation/correct_task.mp4" type="video/mp4">
+            </video>
+          </div>
+          <p class="mot-card-caption">Red &amp; green in; yellow untouched.</p>
+        </article>
+      </div>
+
+      <div class="mot-flow">
+        <div class="mot-flow-label">Observations</div>
+        <div class="mot-obs-grid">
+          <article class="mot-obs">
+            <span class="mot-obs-num">01</span>
+            <h4>Realism ≠ progress</h4>
+            <p>Motions look fine while object selection and constraints quietly drift.</p>
+          </article>
+          <article class="mot-obs">
+            <span class="mot-obs-num">02</span>
+            <h4>Progress must be explicit</h4>
+            <p>One-shot rollout fails <strong>10/10</strong>; staged, state-conditioned subgoals succeed in <strong>2</strong> tries.</p>
+          </article>
+          <article class="mot-obs">
+            <span class="mot-obs-num">03</span>
+            <h4>Memory is missing</h4>
+            <p>Without persistent task state, generators revisit done work or break solved constraints.</p>
+          </article>
+        </div>
+
+        <div class="mot-flow-arrow" aria-hidden="true">
+          <span class="mot-flow-arrow-line"></span>
+          <span class="mot-flow-arrow-head">↓</span>
+          <span class="mot-flow-arrow-text">therefore</span>
+        </div>
+
+        <div class="mot-flow-label mot-flow-label-ideas">Key insights</div>
+        <div class="mot-idea-grid">
+          <article class="mot-idea">
+            <span class="mot-idea-kicker">From Obs. 01</span>
+            <h4>Verify early</h4>
+            <p>Catch invalid transitions before they cascade into irreversible failure.</p>
+          </article>
+          <article class="mot-idea">
+            <span class="mot-idea-kicker">From Obs. 02</span>
+            <h4>Decompose from state</h4>
+            <p>Next subgoal follows the verified scene—not a frozen open-loop plan.</p>
+          </article>
+          <article class="mot-idea">
+            <span class="mot-idea-kicker">From Obs. 03</span>
+            <h4>Track what is done</h4>
+            <p>Remember completed objectives so future steps stay consistent.</p>
+          </article>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+
+  <section class="section content-section" id="architecture">
+    <div class="container is-max-widescreen">
       <div class="columns is-centered has-text-centered">
         <div class="column is-full-width">
-          <h2 class="title is-3">Architecture</h2>
-          <p class="architecture-lead">
-            <strong>Overview.</strong> SAVIOR frames robotic video generation as closed-loop task-state evolution.
-            Each module is verified before its output affects the rollout, keeping long-horizon behavior stable.
-          </p>
+          <div class="sec-head has-text-centered">
+            <div class="sec-eyebrow" style="justify-content:center">Architecture</div>
+            <h2 class="sec-title" style="margin-left:auto;margin-right:auto">Closed-loop task-state evolution</h2>
+            <p class="sec-lede" style="margin-left:auto;margin-right:auto">
+              Each module is verified before its output affects the rollout, keeping long-horizon behavior stable.
+            </p>
+          </div>
           <div class="architecture-grid">
             <div class="architecture-card">
               <h3>Planner</h3>
@@ -189,17 +316,136 @@
             </div>
           </div>
           <div class="content has-text-justified architecture-figure">
-            <img src="scover/propose.png" alt="SCOVER architecture diagram" style="width: 100%;" />
+            <img src="scover/image/savior_propose.png" alt="SCOVER architecture diagram" style="width: 100%;" />
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <section class="section demo-section">
-    <div class="container is-max-desktop">
-      <h2 class="title is-2 has-text-centered">Video Generation</h2>
-      <p class="demo-lead"><span class="task-label">Task:</span> Use robot grippers to pick up all spice bottles and place them into the left basket, and place all fruits into the right basket.</p>
+  <section class="section category-section" id="categories">
+    <div class="container is-max-widescreen">
+      <div class="sec-head has-text-centered">
+        <div class="sec-eyebrow" style="justify-content:center">Data Generation</div>
+        <h2 class="sec-title" style="margin-left:auto;margin-right:auto">Category Focus</h2>
+        <p class="sec-lede" style="margin-left:auto;margin-right:auto">
+          Manipulation experience across four complementary axes—
+          from basic interaction to long-horizon, spatial, and visual reasoning.
+          <br><span class="category-note">Videos below are outputs of <strong>Wan 2.6</strong>.</span>
+        </p>
+      </div>
+
+      <div class="category-overview">
+        <a class="category-chip" href="#cat-common">
+          <span class="category-chip-id">01</span>
+          <span class="category-chip-name">Common Manipulation</span>
+        </a>
+        <a class="category-chip" href="#cat-long">
+          <span class="category-chip-id">02</span>
+          <span class="category-chip-name">Long-Horizon</span>
+        </a>
+        <a class="category-chip" href="#cat-spatial">
+          <span class="category-chip-id">03</span>
+          <span class="category-chip-name">Spatial Reasoning</span>
+        </a>
+        <a class="category-chip" href="#cat-visual">
+          <span class="category-chip-id">04</span>
+          <span class="category-chip-name">Visual Reasoning</span>
+        </a>
+      </div>
+
+      <div class="category-grid">
+
+        <article class="category-card" id="cat-common">
+          <div class="category-card-meta">
+            <span class="category-badge">01 · Common Manipulation</span>
+          </div>
+          <h3 class="category-title">Common Manipulation</h3>
+          <p class="category-desc">
+            Basic grasping, placing, pushing, and object interaction.
+          </p>
+          <p class="category-task">
+            <span class="task-label">Task:</span>
+            Place all objects into the basket.
+          </p>
+          <div class="category-video">
+            <video muted autoplay controls loop playsinline preload="metadata">
+              <source src="./scover/category/basic_pick.mp4" type="video/mp4">
+            </video>
+          </div>
+        </article>
+
+        <article class="category-card" id="cat-long">
+          <div class="category-card-meta">
+            <span class="category-badge">02 · Long-Horizon</span>
+          </div>
+          <h3 class="category-title">Long-Horizon</h3>
+          <p class="category-desc">
+            Multi-stage manipulation with sequential dependencies.
+          </p>
+          <p class="category-task">
+            <span class="task-label">Task:</span>
+            Place exactly seven objects into the basket.
+          </p>
+          <div class="category-video">
+            <video muted autoplay controls loop playsinline preload="metadata">
+              <source src="./scover/category/long_horizon.mp4" type="video/mp4">
+            </video>
+          </div>
+        </article>
+
+        <article class="category-card" id="cat-spatial">
+          <div class="category-card-meta">
+            <span class="category-badge">03 · Spatial Reasoning</span>
+          </div>
+          <h3 class="category-title">Spatial Reasoning</h3>
+          <p class="category-desc">
+            Spatial relation understanding and geometric consistency.
+          </p>
+          <p class="category-task">
+            <span class="task-label">Task:</span>
+            Arrange three blocks left-to-right: red, green, blue.
+          </p>
+          <div class="category-video">
+            <video muted autoplay controls loop playsinline preload="metadata">
+              <source src="./scover/category/spatial_reasoning.mp4" type="video/mp4">
+            </video>
+          </div>
+        </article>
+
+        <article class="category-card" id="cat-visual">
+          <div class="category-card-meta">
+            <span class="category-badge">04 · Visual Reasoning</span>
+          </div>
+          <h3 class="category-title">Visual Reasoning</h3>
+          <p class="category-desc">
+            Attribute grounding, ordering, and fine-grained semantic reasoning.
+          </p>
+          <p class="category-task">
+            <span class="task-label">Task:</span>
+            Place all bottles into the basket—except the yellow one.
+          </p>
+          <div class="category-video">
+            <video muted autoplay controls loop playsinline preload="metadata">
+              <source src="./scover/category/visual_reasoning.mp4" type="video/mp4">
+            </video>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+
+  <section class="section demo-section" id="generation">
+    <div class="container is-max-widescreen">
+      <div class="sec-head has-text-centered">
+        <div class="sec-eyebrow" style="justify-content:center">Video Generation</div>
+        <h2 class="sec-title" style="margin-left:auto;margin-right:auto">Same task, four generators—with and without SAVIOR</h2>
+        <p class="sec-lede" style="margin-left:auto;margin-right:auto">
+          <span class="task-label">Task:</span> Place all spice bottles into the left basket and all fruits into the right basket.
+        </p>
+      </div>
 
       <div class="demo-grid">
         <div class="demo-card">
@@ -210,13 +456,13 @@
           <div class="demo-pair">
             <div class="demo-video">
               <video muted autoplay controls loop playsinline preload="metadata">
-                <source src="./scover/cosmos2_base.mp4" type="video/mp4">
+                <source src="./scover/demo_video/cosmos2_base.mp4" type="video/mp4">
               </video>
               <div class="demo-caption">Cosmos2</div>
             </div>
             <div class="demo-video">
               <video muted autoplay controls loop playsinline preload="metadata">
-                <source src="./scover/cosmos2_propose.mp4" type="video/mp4">
+                <source src="./scover/demo_video/cosmos2_propose.mp4" type="video/mp4">
               </video>
               <div class="demo-caption">Cosmos2 + SAVIOR</div>
             </div>
@@ -231,13 +477,13 @@
           <div class="demo-pair">
             <div class="demo-video">
               <video muted autoplay controls loop playsinline preload="metadata">
-                <source src="./scover/wan2.2_base.mp4" type="video/mp4">
+                <source src="./scover/demo_video/wan2.2_base.mp4" type="video/mp4">
               </video>
               <div class="demo-caption">Wan 2.2</div>
             </div>
             <div class="demo-video">
               <video muted autoplay controls loop playsinline preload="metadata">
-                <source src="./scover/wan2.2_propose.mp4" type="video/mp4">
+                <source src="./scover/demo_video/wan2.2_propose.mp4" type="video/mp4">
               </video>
               <div class="demo-caption">Wan 2.2 + SAVIOR</div>
             </div>
@@ -252,13 +498,13 @@
           <div class="demo-pair">
             <div class="demo-video">
               <video muted autoplay controls loop playsinline preload="metadata">
-                <source src="./scover/wan2.6_base.mp4" type="video/mp4">
+                <source src="./scover/demo_video/wan2.6_base.mp4" type="video/mp4">
               </video>
               <div class="demo-caption">Wan 2.6</div>
             </div>
             <div class="demo-video">
               <video muted autoplay controls loop playsinline preload="metadata">
-                <source src="./scover/wan2.6_propose.mp4" type="video/mp4">
+                <source src="./scover/demo_video/wan2.6_propose.mp4" type="video/mp4">
               </video>
               <div class="demo-caption">Wan 2.6 + SAVIOR</div>
             </div>
@@ -273,13 +519,13 @@
           <div class="demo-pair">
             <div class="demo-video">
               <video muted autoplay controls loop playsinline preload="metadata">
-                <source src="./scover/veo3.1_base.mp4" type="video/mp4">
+                <source src="./scover/demo_video/veo3.1_base.mp4" type="video/mp4">
               </video>
               <div class="demo-caption">Veo 3.1</div>
             </div>
             <div class="demo-video">
               <video muted autoplay controls loop playsinline preload="metadata">
-                <source src="./scover/veo3.1_propose.mp4" type="video/mp4">
+                <source src="./scover/demo_video/veo3.1_propose.mp4" type="video/mp4">
               </video>
               <div class="demo-caption">Veo 3.1 + SAVIOR</div>
             </div>
@@ -289,17 +535,15 @@
     </div>
   </section>
 
-  <section class="section runtime-section">
-    <div class="container is-max-desktop">
+  <section class="section runtime-section" id="recovery">
+    <div class="container is-max-widescreen">
 
-      <div class="has-text-centered">
-        <span class="runtime-tag">Closed-Loop Execution</span>
-        <h2 class="title is-2 runtime-title">Runtime verification &amp; dynamic recovery</h2>
-        <p class="runtime-lead">
-          Long-horizon failures rarely arrive as a single collapse.
-          They accumulate as locally invalid transitions.
-          SAVIOR catches those transitions at runtime, regenerates the failed segment,
-          and resumes from the last verified task state—before the error poisons the rest of the rollout.
+      <div class="sec-head has-text-centered">
+        <div class="sec-eyebrow" style="justify-content:center">Closed-Loop Execution</div>
+        <h2 class="sec-title" style="margin-left:auto;margin-right:auto">Runtime verification &amp; dynamic recovery</h2>
+        <p class="sec-lede" style="margin-left:auto;margin-right:auto">
+          Failures accumulate as local invalid transitions.
+          SAVIOR catches them, regenerates the failed segment, and resumes from the last verified state.
         </p>
       </div>
 
@@ -312,14 +556,13 @@
 
         <div class="runtime-video-wrap">
           <video muted autoplay controls loop playsinline preload="metadata">
-            <source src="./scover/recovery_trace.mp4" type="video/mp4">
+            <source src="./scover/demo_video/recovery_trace.mp4" type="video/mp4">
           </video>
         </div>
 
         <p class="runtime-caption">
           <span class="task-label">Task:</span>
-          Pick up all objects and place all fruits into the right basket—
-          with on-the-fly recovery when a generated transition violates task progress.
+          Place all fruits into the right basket—recovering mid-rollout when progress breaks.
         </p>
       </div>
 
@@ -349,64 +592,119 @@
         </div>
       </div>
 
-      <!-- Emergent Recovery Behaviors -->
-      <div class="distribution-box runtime-behaviors">
-
-        <div class="columns is-vcentered is-variable is-5">
-
-          <div class="column is-7">
-            <img src="./scover/distribution_RQ2.png"
-                alt="Recovery distribution"
-                class="distribution-image">
+      <!-- Recovery cases -->
+      <div class="rcv-block">
+        <div class="rcv-head">
+          <div>
+            <h3 class="rcv-title">Three ways to recover</h3>
+            <p class="rcv-sub">
+              Most failures are local. SAVIOR rejects the bad transition, then adapts
+              <strong>how</strong> the next segment is conditioned—not just retries blindly.
+            </p>
           </div>
+          <div class="rcv-chart">
+            <img src="./scover/image/distribution_RQ2.png" alt="Recovery behavior distribution">
+            <span class="rcv-chart-cap">Dominant mode: instruction refinement (~57%)</span>
+          </div>
+        </div>
 
-          <div class="column is-5">
-            <div class="behavior-card">
+        <div class="rcv-cases">
 
-              <h3 class="behavior-title">
-                Emergent Recovery Behaviors
-              </h3>
-
-              <p class="behavior-description">
-                Persistent verification enables adaptive recovery
-                under semantic and manipulation constraints.
-              </p>
-
-              <div class="behavior-list">
-
-                <div class="behavior-item">
-                  <div class="behavior-icon strategy-icon">↺</div>
-                  <div class="behavior-content">
-                    <div class="behavior-name">Strategy Change</div>
-                    <div class="behavior-text">
-                      Recover through adaptive re-planning, such as action re-ordering, decomposition refinement.
-                    </div>
-                  </div>
-                </div>
-
-                <div class="behavior-item">
-                  <div class="behavior-icon embodiment-icon">✋</div>
-                  <div class="behavior-content">
-                    <div class="behavior-name">Tool Selection</div>
-                    <div class="behavior-text">
-                      Switch active manipulator for improved reachability.
-                    </div>
-                  </div>
-                </div>
-
-                <div class="behavior-item">
-                  <div class="behavior-icon instruction-icon">✎</div>
-                  <div class="behavior-content">
-                    <div class="behavior-name">Instruction Refinement</div>
-                    <div class="behavior-text">
-                      Refine task specification to reduce ambiguity.
-                    </div>
-                  </div>
-                </div>
-
+          <article class="rcv-case">
+            <div class="rcv-case-top">
+              <span class="rcv-type rcv-type-instruction">✎ Instruction Refinement</span>
+              <span class="rcv-fix">Clarify objects, order, and placement</span>
+            </div>
+            <div class="rcv-prompts">
+              <div class="rcv-prompt rcv-prompt-a">
+                <span class="rcv-prompt-label">A · initial</span>
+                <p>Put the fruits into the basket.</p>
+              </div>
+              <div class="rcv-prompt-arrow" aria-hidden="true">→</div>
+              <div class="rcv-prompt rcv-prompt-b">
+                <span class="rcv-prompt-label">B · recovered</span>
+                <p>Left gripper picks the red apple; right gripper picks the green apple—both into the right side of the basket. Yellow banana stays on the table.</p>
               </div>
             </div>
-          </div>
+            <div class="rcv-videos">
+              <div class="rcv-vid">
+                <span class="rcv-vid-badge rcv-vid-fail">Fail</span>
+                <video muted autoplay controls loop playsinline preload="metadata">
+                  <source src="./scover/recovery/instruction_fail.mp4" type="video/mp4">
+                </video>
+              </div>
+              <div class="rcv-vid">
+                <span class="rcv-vid-badge rcv-vid-ok">Recovered</span>
+                <video muted autoplay controls loop playsinline preload="metadata">
+                  <source src="./scover/recovery/instruction_success.mp4" type="video/mp4">
+                </video>
+              </div>
+            </div>
+          </article>
+
+          <article class="rcv-case">
+            <div class="rcv-case-top">
+              <span class="rcv-type rcv-type-tool">✋ Tool Selection</span>
+              <span class="rcv-fix">Switch to the reachable gripper</span>
+            </div>
+            <div class="rcv-prompts">
+              <div class="rcv-prompt rcv-prompt-a">
+                <span class="rcv-prompt-label">A · initial</span>
+                <p>Use the left gripper to pick up the yellow banana and put it into the basket.</p>
+              </div>
+              <div class="rcv-prompt-arrow" aria-hidden="true">→</div>
+              <div class="rcv-prompt rcv-prompt-b">
+                <span class="rcv-prompt-label">B · recovered</span>
+                <p>Use the right gripper to pick up the yellow banana and place it fully inside the wire basket.</p>
+              </div>
+            </div>
+            <div class="rcv-videos">
+              <div class="rcv-vid">
+                <span class="rcv-vid-badge rcv-vid-fail">Fail</span>
+                <video muted autoplay controls loop playsinline preload="metadata">
+                  <source src="./scover/recovery/tool_fail.mp4" type="video/mp4">
+                </video>
+              </div>
+              <div class="rcv-vid">
+                <span class="rcv-vid-badge rcv-vid-ok">Recovered</span>
+                <video muted autoplay controls loop playsinline preload="metadata">
+                  <source src="./scover/recovery/tool_success.mp4" type="video/mp4">
+                </video>
+              </div>
+            </div>
+          </article>
+
+          <article class="rcv-case">
+            <div class="rcv-case-top">
+              <span class="rcv-type rcv-type-strategy">↺ Strategy Change</span>
+              <span class="rcv-fix">Re-decompose: one category per arm, one basket per arm</span>
+            </div>
+            <div class="rcv-prompts">
+              <div class="rcv-prompt rcv-prompt-a">
+                <span class="rcv-prompt-label">A · initial</span>
+                <p>Use both grippers to pick the spice bottles and put them into the left basket.</p>
+              </div>
+              <div class="rcv-prompt-arrow" aria-hidden="true">→</div>
+              <div class="rcv-prompt rcv-prompt-b">
+                <span class="rcv-prompt-label">B · recovered</span>
+                <p>Left arm: spice bottles → left basket. Right arm: fruits → right basket—parallel, category-separated rollout.</p>
+              </div>
+            </div>
+            <div class="rcv-videos">
+              <div class="rcv-vid">
+                <span class="rcv-vid-badge rcv-vid-fail">Fail</span>
+                <video muted autoplay controls loop playsinline preload="metadata">
+                  <source src="./scover/recovery/strategy_fail.mp4" type="video/mp4">
+                </video>
+              </div>
+              <div class="rcv-vid">
+                <span class="rcv-vid-badge rcv-vid-ok">Recovered</span>
+                <video muted autoplay controls loop playsinline preload="metadata">
+                  <source src="./scover/recovery/strategy_success.mp4" type="video/mp4">
+                </video>
+              </div>
+            </div>
+          </article>
 
         </div>
       </div>
@@ -423,10 +721,15 @@
     </div>
   </section>
 
-  <section class="section v2r-section">
-    <div class="container is-max-desktop">
-      <h2 class="title is-2 has-text-centered">Video to Real</h2>
-      <p class="demo-lead"><span class="task-label">Task:</span> Pick all objects.</p>
+  <section class="section v2r-section" id="real">
+    <div class="container is-max-widescreen">
+      <div class="sec-head has-text-centered">
+        <div class="sec-eyebrow" style="justify-content:center">Video to Real</div>
+        <h2 class="sec-title" style="margin-left:auto;margin-right:auto">Verified rollouts transfer to hardware</h2>
+        <p class="sec-lede" style="margin-left:auto;margin-right:auto">
+          <span class="task-label">Task:</span> Place all objects into the basket.
+        </p>
+      </div>
 
       <div class="v2r-pipeline">
         <div class="v2r-step">
@@ -436,7 +739,7 @@
           </div>
           <div class="v2r-video-wrap">
             <video muted autoplay controls loop playsinline preload="metadata">
-              <source src="./scover/real_robot_gen.mp4" type="video/mp4">
+              <source src="./scover/demo_video/real_robot_gen.mp4" type="video/mp4">
             </video>
           </div>
           <p class="v2r-step-caption">Verified long-horizon rollout from video generation</p>
@@ -455,7 +758,7 @@
           </div>
           <div class="v2r-video-wrap">
             <video muted autoplay controls loop playsinline preload="metadata">
-              <source src="./scover/egocentric_real.mp4" type="video/mp4">
+              <source src="./scover/demo_video/egocentric_real.mp4" type="video/mp4">
             </video>
           </div>
           <p class="v2r-step-caption">Physical execution from recovered actions</p>
@@ -468,20 +771,53 @@
         </div>
         <div class="v2r-video-wrap v2r-video-wrap-wide">
           <video muted autoplay controls loop playsinline preload="metadata">
-            <source src="./scover/real_robot.mp4" type="video/mp4">
+            <source src="./scover/demo_video/real_robot.mp4" type="video/mp4">
           </video>
         </div>
       </div>
 
+      <div class="real-results">
+        <div class="real-results-head">
+          <h3 class="real-results-title">Real-robot execution (RQ4)</h3>
+          <p class="real-results-note">
+            Same IDM and controller; only the source video changes.
+            5 long-horizon tasks × 6 trials (30 trials).
+          </p>
+        </div>
+        <div class="real-table-wrap">
+          <table class="real-table">
+            <thead>
+              <tr>
+                <th>Model</th>
+                <th>Video SR (%) ↑</th>
+                <th>Execution Success (%) ↑</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Wan2.6</td>
+                <td>50</td>
+                <td>30</td>
+              </tr>
+              <tr class="real-row-ours">
+                <td>+ SAVIOR (Ours)</td>
+                <td>90 <span class="delta">(+40)</span></td>
+                <td>80 <span class="delta">(+50)</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
       <p class="v2r-footnote">
-        Same task, same IDM and controller—only the source video changes.
-        SAVIOR improves both video-level completion and physical execution on hardware.
+        Verified task progression improves not only terminal video outcomes,
+        but the intermediate interaction consistency needed for reliable action recovery on hardware.
       </p>
     </div>
   </section>
 
 
-  <section>
+  <section id="bibtex">
     <div class="container">
         <br>
         <h2 class="title is-3">BibTeX</h2>
@@ -509,6 +845,29 @@
     </div>
   </footer>
 
+  <script>
+    (function () {
+      var links = Array.prototype.slice.call(document.querySelectorAll('.site-nav-links a'));
+      if (!links.length) return;
+      var sections = links
+        .map(function (a) { return document.querySelector(a.getAttribute('href')); })
+        .filter(Boolean);
+
+      function setActive() {
+        var y = window.scrollY + 90;
+        var current = sections[0];
+        sections.forEach(function (sec) {
+          if (sec.offsetTop <= y) current = sec;
+        });
+        links.forEach(function (a) {
+          a.classList.toggle('active', current && a.getAttribute('href') === '#' + current.id);
+        });
+      }
+
+      window.addEventListener('scroll', setActive, { passive: true });
+      setActive();
+    })();
+  </script>
 </body>
 
 </html>
