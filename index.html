@@ -300,19 +300,19 @@
           <div class="architecture-grid">
             <div class="architecture-card">
               <h3>Planner</h3>
-              <p>Predicts admissible manipulation objectives from the current task state.</p>
+              <p>Dynamically selects the next subgoal from verified task progress, adapting the plan after failures.</p>
             </div>
             <div class="architecture-card">
               <h3>Generator</h3>
-              <p>Synthesizes task-conditioned state transitions for the next step.</p>
+              <p>Synthesizes short-horizon interaction segments conditioned on the latest verified state.</p>
             </div>
             <div class="architecture-card">
               <h3>Validator</h3>
-              <p>Verifies feasibility and task consistency before memory updates.</p>
+              <p>Detects invalid transitions before they propagate and provides targeted feedback for recovery.</p>
             </div>
             <div class="architecture-card">
               <h3>State Memory</h3>
-              <p>Persists accumulated progress and gates future rollout.</p>
+              <p>Maintains persistent task progress, preserving completed objectives and unresolved constraints across the rollout.</p>
             </div>
           </div>
           <div class="content has-text-justified architecture-figure">
