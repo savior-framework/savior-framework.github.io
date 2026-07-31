@@ -137,24 +137,54 @@
         </div>
       </div>
 
-      <div class="gap-grid">
-        <article class="gap-card" style="--accent:#1A5FD6">
+      <div class="gap-grid" data-gap-grid>
+        <article class="gap-card" style="--accent:#1A5FD6; --i:0">
           <div class="gap-tag">Gap 01 · Rollout</div>
           <h3>One bad frame poisons the rest</h3>
-          <p class="problem">Open-loop video keeps generating even after an invalid grasp or wrong object—corrupting every later step.</p>
-          <p class="solution"><b>Our answer:</b> reject failed transitions before they enter state memory; resume from the last verified observation.</p>
+          <div class="gap-stack">
+            <div class="gap-problem-block">
+              <span class="gap-kicker gap-kicker-problem">Problem</span>
+              <p class="problem">Open-loop video keeps generating even after an invalid grasp or wrong object—corrupting every later step.</p>
+            </div>
+            <div class="gap-bridge" aria-hidden="true">
+              <span class="gap-bridge-pulse"></span>
+              <span class="gap-bridge-line"></span>
+              <span class="gap-bridge-arrow">↓</span>
+            </div>
+            <p class="solution"><b>Our answer:</b> reject failed transitions before they enter state memory; resume from the last verified observation.</p>
+          </div>
         </article>
-        <article class="gap-card" style="--accent:#6D4FC4">
+        <article class="gap-card" style="--accent:#6D4FC4; --i:1">
           <div class="gap-tag">Gap 02 · Planning</div>
           <h3>Frozen plans can’t track progress</h3>
-          <p class="problem">A fixed open-loop decomposition cannot adapt when the scene changes mid-task.</p>
-          <p class="solution"><b>Our answer:</b> dynamically choose the next subgoal from verified task state—not a predetermined script.</p>
+          <div class="gap-stack">
+            <div class="gap-problem-block">
+              <span class="gap-kicker gap-kicker-problem">Problem</span>
+              <p class="problem">A fixed open-loop decomposition cannot adapt when the scene changes mid-task.</p>
+            </div>
+            <div class="gap-bridge" aria-hidden="true">
+              <span class="gap-bridge-pulse"></span>
+              <span class="gap-bridge-line"></span>
+              <span class="gap-bridge-arrow">↓</span>
+            </div>
+            <p class="solution"><b>Our answer:</b> dynamically choose the next subgoal from verified task state—not a predetermined script.</p>
+          </div>
         </article>
-        <article class="gap-card" style="--accent:#0E9F6E">
+        <article class="gap-card" style="--accent:#0E9F6E; --i:2">
           <div class="gap-tag">Gap 03 · Execution</div>
           <h3>Pretty video ≠ executable actions</h3>
-          <p class="problem">Visually plausible clips still fail on hardware when intermediate contacts are inconsistent.</p>
-          <p class="solution"><b>Our answer:</b> verified progression yields cleaner IDM-recovered actions and stronger real-humanoid success.</p>
+          <div class="gap-stack">
+            <div class="gap-problem-block">
+              <span class="gap-kicker gap-kicker-problem">Problem</span>
+              <p class="problem">Visually plausible clips still fail on hardware when intermediate contacts are inconsistent.</p>
+            </div>
+            <div class="gap-bridge" aria-hidden="true">
+              <span class="gap-bridge-pulse"></span>
+              <span class="gap-bridge-line"></span>
+              <span class="gap-bridge-arrow">↓</span>
+            </div>
+            <p class="solution"><b>Our answer:</b> verified progression yields cleaner IDM-recovered actions and stronger real-humanoid success.</p>
+          </div>
         </article>
       </div>
     </div>
@@ -236,48 +266,89 @@
         </article>
       </div>
 
-      <div class="mot-flow">
-        <div class="mot-flow-label">Observations</div>
-        <div class="mot-obs-grid">
-          <article class="mot-obs">
-            <span class="mot-obs-num">01</span>
-            <h4>Realism ≠ progress</h4>
-            <p>Motions look fine while object selection and constraints quietly drift.</p>
-          </article>
-          <article class="mot-obs">
-            <span class="mot-obs-num">02</span>
-            <h4>Progress must be explicit</h4>
-            <p>One-shot rollout fails <strong>10/10</strong>; staged, state-conditioned subgoals succeed in <strong>2</strong> tries.</p>
-          </article>
-          <article class="mot-obs">
-            <span class="mot-obs-num">03</span>
-            <h4>Memory is missing</h4>
-            <p>Without persistent task state, generators revisit done work or break solved constraints.</p>
-          </article>
+      <div class="mot-flow" data-mot-flow>
+        <div class="mot-flow-head">
+          <div class="mot-flow-head-copy">
+            <div class="mot-flow-labels">
+              <span class="mot-flow-label">Observations</span>
+              <span class="mot-flow-bridge-tag" aria-hidden="true">→</span>
+              <span class="mot-flow-label mot-flow-label-ideas">Key insights</span>
+            </div>
+            <p class="mot-flow-sub">Each failure mode maps to a hard design principle for long-horizon generation.</p>
+          </div>
         </div>
 
-        <div class="mot-flow-arrow" aria-hidden="true">
-          <span class="mot-flow-arrow-line"></span>
-          <span class="mot-flow-arrow-head">↓</span>
-          <span class="mot-flow-arrow-text">therefore</span>
-        </div>
+        <div class="mot-bridge-grid">
+          <article class="mot-bridge" data-bridge="1" style="--i:0">
+            <div class="mot-obs">
+              <div class="mot-obs-meta">
+                <span class="mot-obs-num">01</span>
+                <span class="mot-obs-tag">Diagnosis</span>
+              </div>
+              <h4>Visual fidelity masks task failure</h4>
+              <p>Plausible motion can still violate selection rules and constraints—the error is semantic, not visual.</p>
+            </div>
+            <div class="mot-bridge-link" aria-hidden="true">
+              <span class="mot-bridge-pulse"></span>
+              <span class="mot-bridge-line"></span>
+              <span class="mot-bridge-arrow"><span class="mot-arrow-h">→</span><span class="mot-arrow-v">↓</span></span>
+            </div>
+            <div class="mot-idea">
+              <div class="mot-idea-meta">
+                <span class="mot-idea-kicker">Insight 01</span>
+                <span class="mot-idea-tag">Principle</span>
+              </div>
+              <h4>Gate every transition</h4>
+              <p>Reject invalid steps before they enter the trajectory and poison downstream state.</p>
+            </div>
+          </article>
 
-        <div class="mot-flow-label mot-flow-label-ideas">Key insights</div>
-        <div class="mot-idea-grid">
-          <article class="mot-idea">
-            <span class="mot-idea-kicker">From Obs. 01</span>
-            <h4>Verify early</h4>
-            <p>Catch invalid transitions before they cascade into irreversible failure.</p>
+          <article class="mot-bridge" data-bridge="2" style="--i:1">
+            <div class="mot-obs">
+              <div class="mot-obs-meta">
+                <span class="mot-obs-num">02</span>
+                <span class="mot-obs-tag">Evidence</span>
+              </div>
+              <h4>Open-loop progress is brittle</h4>
+              <p>One-shot generation fails <strong>10/10</strong>; state-conditioned subgoals succeed within <strong>2</strong> attempts.</p>
+            </div>
+            <div class="mot-bridge-link" aria-hidden="true">
+              <span class="mot-bridge-pulse"></span>
+              <span class="mot-bridge-line"></span>
+              <span class="mot-bridge-arrow"><span class="mot-arrow-h">→</span><span class="mot-arrow-v">↓</span></span>
+            </div>
+            <div class="mot-idea">
+              <div class="mot-idea-meta">
+                <span class="mot-idea-kicker">Insight 02</span>
+                <span class="mot-idea-tag">Principle</span>
+              </div>
+              <h4>Plan from verified state</h4>
+              <p>Derive the next subgoal from the last accepted observation—not a frozen open-loop script.</p>
+            </div>
           </article>
-          <article class="mot-idea">
-            <span class="mot-idea-kicker">From Obs. 02</span>
-            <h4>Decompose from state</h4>
-            <p>Next subgoal follows the verified scene—not a frozen open-loop plan.</p>
-          </article>
-          <article class="mot-idea">
-            <span class="mot-idea-kicker">From Obs. 03</span>
-            <h4>Track what is done</h4>
-            <p>Remember completed objectives so future steps stay consistent.</p>
+
+          <article class="mot-bridge" data-bridge="3" style="--i:2">
+            <div class="mot-obs">
+              <div class="mot-obs-meta">
+                <span class="mot-obs-num">03</span>
+                <span class="mot-obs-tag">Failure mode</span>
+              </div>
+              <h4>Without memory, success unravels</h4>
+              <p>Absent persistent task state, models redo finished work and break already-satisfied constraints.</p>
+            </div>
+            <div class="mot-bridge-link" aria-hidden="true">
+              <span class="mot-bridge-pulse"></span>
+              <span class="mot-bridge-line"></span>
+              <span class="mot-bridge-arrow"><span class="mot-arrow-h">→</span><span class="mot-arrow-v">↓</span></span>
+            </div>
+            <div class="mot-idea">
+              <div class="mot-idea-meta">
+                <span class="mot-idea-kicker">Insight 03</span>
+                <span class="mot-idea-tag">Principle</span>
+              </div>
+              <h4>Persist completed objectives</h4>
+              <p>Keep an explicit record of what is done so later steps remain consistent with prior success.</p>
+            </div>
           </article>
         </div>
       </div>
@@ -288,38 +359,116 @@
 
   <section class="section content-section" id="architecture">
     <div class="container is-max-widescreen">
-      <div class="columns is-centered has-text-centered">
-        <div class="column is-full-width">
-          <div class="sec-head has-text-centered">
-            <div class="sec-eyebrow" style="justify-content:center">Architecture</div>
-            <h2 class="sec-title" style="margin-left:auto;margin-right:auto">Closed-loop task-state evolution</h2>
-            <p class="sec-lede" style="margin-left:auto;margin-right:auto">
-              Each module is verified before its output affects the rollout, keeping long-horizon behavior stable.
-            </p>
+      <div class="sec-head has-text-centered">
+        <div class="sec-eyebrow" style="justify-content:center">Architecture</div>
+        <h2 class="sec-title" style="margin-left:auto;margin-right:auto">Closed-loop task-state evolution</h2>
+        <p class="sec-lede" style="margin-left:auto;margin-right:auto">
+          Each module is verified before its output affects the rollout, keeping long-horizon behavior stable.
+        </p>
+      </div>
+
+      <div class="arch-loop" data-arch-loop>
+        <div class="arch-loop-rail" aria-hidden="true">
+          <span class="arch-loop-rail-fill"></span>
+        </div>
+
+        <div class="arch-modules">
+          <article class="arch-module arch-module-planner" style="--i:0">
+            <div class="arch-module-top">
+              <span class="arch-module-icon" aria-hidden="true"><i class="fas fa-sitemap"></i></span>
+              <span class="arch-module-step">01</span>
+            </div>
+            <span class="arch-module-role">Plan</span>
+            <h3>Planner</h3>
+            <p>Dynamically selects the next subgoal from verified task progress, adapting the plan after failures.</p>
+            <div class="arch-module-foot">
+              <span class="arch-module-io">in</span>
+              <span>verified state</span>
+              <span class="arch-module-io">out</span>
+              <span>subgoal</span>
+            </div>
+          </article>
+
+          <div class="arch-connector" aria-hidden="true" style="--i:0">
+            <span class="arch-connector-line"></span>
+            <span class="arch-connector-head">→</span>
           </div>
-          <div class="architecture-grid">
-            <div class="architecture-card">
-              <h3>Planner</h3>
-              <p>Dynamically selects the next subgoal from verified task progress, adapting the plan after failures.</p>
+
+          <article class="arch-module arch-module-generator" style="--i:1">
+            <div class="arch-module-top">
+              <span class="arch-module-icon" aria-hidden="true"><i class="fas fa-film"></i></span>
+              <span class="arch-module-step">02</span>
             </div>
-            <div class="architecture-card">
-              <h3>Generator</h3>
-              <p>Synthesizes short-horizon interaction segments conditioned on the latest verified state.</p>
+            <span class="arch-module-role">Synthesize</span>
+            <h3>Generator</h3>
+            <p>Synthesizes short-horizon interaction segments conditioned on the latest verified state.</p>
+            <div class="arch-module-foot">
+              <span class="arch-module-io">in</span>
+              <span>subgoal + state</span>
+              <span class="arch-module-io">out</span>
+              <span>candidate clip</span>
             </div>
-            <div class="architecture-card">
-              <h3>Validator</h3>
-              <p>Detects invalid transitions before they propagate and provides targeted feedback for recovery.</p>
-            </div>
-            <div class="architecture-card">
-              <h3>State Memory</h3>
-              <p>Maintains persistent task progress, preserving completed objectives and unresolved constraints across the rollout.</p>
-            </div>
+          </article>
+
+          <div class="arch-connector" aria-hidden="true" style="--i:1">
+            <span class="arch-connector-line"></span>
+            <span class="arch-connector-head">→</span>
           </div>
-          <div class="content has-text-justified architecture-figure">
-            <img src="scover/image/savior_propose.png" alt="SCOVER architecture diagram" style="width: 100%;" />
+
+          <article class="arch-module arch-module-validator" style="--i:2">
+            <div class="arch-module-top">
+              <span class="arch-module-icon" aria-hidden="true"><i class="fas fa-shield-alt"></i></span>
+              <span class="arch-module-step">03</span>
+            </div>
+            <span class="arch-module-role">Gate</span>
+            <h3>Validator</h3>
+            <p>Detects invalid transitions before they propagate and provides targeted feedback for recovery.</p>
+            <div class="arch-module-foot">
+              <span class="arch-module-io">in</span>
+              <span>candidate clip</span>
+              <span class="arch-module-io">out</span>
+              <span>accept / reject</span>
+            </div>
+          </article>
+
+          <div class="arch-connector" aria-hidden="true" style="--i:2">
+            <span class="arch-connector-line"></span>
+            <span class="arch-connector-head">→</span>
+          </div>
+
+          <article class="arch-module arch-module-state" style="--i:3">
+            <div class="arch-module-top">
+              <span class="arch-module-icon" aria-hidden="true"><i class="fas fa-database"></i></span>
+              <span class="arch-module-step">04</span>
+            </div>
+            <span class="arch-module-role">Remember</span>
+            <h3>State Memory</h3>
+            <p>Maintains persistent task progress, preserving completed objectives and unresolved constraints across the rollout.</p>
+            <div class="arch-module-foot">
+              <span class="arch-module-io">in</span>
+              <span>accepted step</span>
+              <span class="arch-module-io">out</span>
+              <span>task state</span>
+            </div>
+          </article>
+        </div>
+
+        <div class="arch-loopback" aria-hidden="true">
+          <div class="arch-loopback-line"></div>
+          <div class="arch-loopback-label">
+            <span class="arch-loopback-dot"></span>
+            closed loop — state feeds the next plan
           </div>
         </div>
       </div>
+
+      <figure class="architecture-figure" data-arch-figure>
+        <div class="architecture-figure-frame">
+          <span class="architecture-figure-scan" aria-hidden="true"></span>
+          <img src="scover/image/savior_propose.png" alt="SAVIOR architecture diagram" />
+        </div>
+        <figcaption class="architecture-figure-cap">Closed-loop SAVIOR pipeline — plan, generate, validate, and update state.</figcaption>
+      </figure>
     </div>
   </section>
 
@@ -566,29 +715,45 @@
         </p>
       </div>
 
-      <div class="runtime-insight-grid">
-        <div class="runtime-insight">
-          <div class="runtime-insight-kicker">01 · Detect</div>
-          <h3>Transition-level checks</h3>
-          <p>
-            Each generated step is validated against verified task progress rather than visual realism alone.
-          </p>
-        </div>
-        <div class="runtime-insight">
-          <div class="runtime-insight-kicker">02 · Isolate</div>
-          <h3>Local errors stay local</h3>
-          <p>
-            Failed segments are discarded before they enter state memory,
-            so one bad grasp cannot silently rewrite the entire horizon.
-          </p>
-        </div>
-        <div class="runtime-insight">
-          <div class="runtime-insight-kicker">03 · Recover</div>
-          <h3>Replan from a clean state</h3>
-          <p>
-            SAVIOR regenerates from the last accepted observation,
-            restoring executable continuity instead of continuing a corrupted rollout.
-          </p>
+      <div class="runtime-insight-flow" data-runtime-flow>
+        <div class="runtime-insight-grid">
+          <article class="runtime-insight" style="--accent:#1A5FD6; --i:0">
+            <div class="runtime-insight-kicker">01 · Detect</div>
+            <h3>Transition-level checks</h3>
+            <p>
+              Each generated step is validated against verified task progress rather than visual realism alone.
+            </p>
+          </article>
+
+          <div class="runtime-insight-conn" aria-hidden="true" style="--i:0">
+            <span class="runtime-insight-conn-pulse"></span>
+            <span class="runtime-insight-conn-line"></span>
+            <span class="runtime-insight-conn-arrow"><span class="ri-arrow-h">→</span><span class="ri-arrow-v">↓</span></span>
+          </div>
+
+          <article class="runtime-insight" style="--accent:#6D4FC4; --i:1">
+            <div class="runtime-insight-kicker">02 · Isolate</div>
+            <h3>Local errors stay local</h3>
+            <p>
+              Failed segments are discarded before they enter state memory,
+              so one bad grasp cannot silently rewrite the entire horizon.
+            </p>
+          </article>
+
+          <div class="runtime-insight-conn" aria-hidden="true" style="--i:1">
+            <span class="runtime-insight-conn-pulse"></span>
+            <span class="runtime-insight-conn-line"></span>
+            <span class="runtime-insight-conn-arrow"><span class="ri-arrow-h">→</span><span class="ri-arrow-v">↓</span></span>
+          </div>
+
+          <article class="runtime-insight" style="--accent:#0E9F6E; --i:2">
+            <div class="runtime-insight-kicker">03 · Recover</div>
+            <h3>Replan from a clean state</h3>
+            <p>
+              SAVIOR regenerates from the last accepted observation,
+              restoring executable continuity instead of continuing a corrupted rollout.
+            </p>
+          </article>
         </div>
       </div>
 
@@ -602,8 +767,11 @@
               <strong>how</strong> the next segment is conditioned—not just retries blindly.
             </p>
           </div>
-          <div class="rcv-chart">
-            <img src="./scover/image/distribution_RQ2.png" alt="Recovery behavior distribution">
+          <div class="rcv-chart" data-rcv-chart>
+            <div class="rcv-chart-frame">
+              <span class="rcv-chart-scan" aria-hidden="true"></span>
+              <img src="./scover/image/distribution_RQ2.png" alt="Recovery behavior distribution">
+            </div>
             <span class="rcv-chart-cap">Dominant mode: instruction refinement (~57%)</span>
           </div>
         </div>
@@ -709,14 +877,19 @@
         </div>
       </div>
 
-      <p class="runtime-takeaway">
-        <strong>Key insight.</strong>
-        The bottleneck in long-horizon robotic video generation is not synthesis capacity,
-        but <em>accumulated transition error</em>.
-        Once each step is gated by verified task progress, recovery stops being an afterthought—
-        it emerges as strategy change, tool selection, and instruction refinement,
-        turning locally invalid motions into recoverable control events rather than irreversible rollout collapse.
-      </p>
+      <aside class="runtime-takeaway" data-runtime-takeaway>
+        <div class="runtime-takeaway-top">
+          <span class="runtime-takeaway-badge">Key insight</span>
+          <span class="runtime-takeaway-pulse" aria-hidden="true"></span>
+        </div>
+        <p>
+          The bottleneck in long-horizon robotic video generation is not synthesis capacity,
+          but <em>accumulated transition error</em>.
+          Once each step is gated by verified task progress, recovery stops being an afterthought—
+          it emerges as strategy change, tool selection, and instruction refinement,
+          turning locally invalid motions into recoverable control events rather than irreversible rollout collapse.
+        </p>
+      </aside>
 
     </div>
   </section>
@@ -837,7 +1010,7 @@
         <div class="column is-8">
           <div class="content">
             <p>
-              This website template is borrowed from <a href="https://github.com/nerfies/nerfies.github.io">Here</a>.
+              <!-- This website template is borrowed from <a href="https://github.com/nerfies/nerfies.github.io">Here</a>. -->
             </p>
           </div>
         </div>
@@ -848,24 +1021,72 @@
   <script>
     (function () {
       var links = Array.prototype.slice.call(document.querySelectorAll('.site-nav-links a'));
-      if (!links.length) return;
-      var sections = links
-        .map(function (a) { return document.querySelector(a.getAttribute('href')); })
-        .filter(Boolean);
+      if (links.length) {
+        var sections = links
+          .map(function (a) { return document.querySelector(a.getAttribute('href')); })
+          .filter(Boolean);
 
-      function setActive() {
-        var y = window.scrollY + 90;
-        var current = sections[0];
-        sections.forEach(function (sec) {
-          if (sec.offsetTop <= y) current = sec;
-        });
-        links.forEach(function (a) {
-          a.classList.toggle('active', current && a.getAttribute('href') === '#' + current.id);
-        });
+        function setActive() {
+          var y = window.scrollY + 90;
+          var current = sections[0];
+          sections.forEach(function (sec) {
+            if (sec.offsetTop <= y) current = sec;
+          });
+          links.forEach(function (a) {
+            a.classList.toggle('active', current && a.getAttribute('href') === '#' + current.id);
+          });
+        }
+
+        window.addEventListener('scroll', setActive, { passive: true });
+        setActive();
       }
 
-      window.addEventListener('scroll', setActive, { passive: true });
-      setActive();
+      function observeInview(selector) {
+        var el = document.querySelector(selector);
+        if (!el) return null;
+        if (!('IntersectionObserver' in window)) {
+          el.classList.add('is-inview');
+          return el;
+        }
+        var io = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('is-inview');
+              io.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.2, rootMargin: '0px 0px -8% 0px' });
+        io.observe(el);
+        return el;
+      }
+
+      observeInview('[data-mot-flow]');
+      observeInview('[data-gap-grid]');
+      observeInview('[data-runtime-flow]');
+      observeInview('[data-runtime-takeaway]');
+      observeInview('[data-arch-figure]');
+      observeInview('[data-rcv-chart]');
+      var arch = observeInview('[data-arch-loop]');
+
+      if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        function cycleActive(rootSelector, itemSelector, intervalMs) {
+          var root = document.querySelector(rootSelector);
+          if (!root) return;
+          var items = Array.prototype.slice.call(root.querySelectorAll(itemSelector));
+          if (!items.length) return;
+          var idx = 0;
+          setInterval(function () {
+            items.forEach(function (el, i) {
+              el.classList.toggle('is-active', i === idx);
+            });
+            idx = (idx + 1) % items.length;
+          }, intervalMs);
+        }
+
+        cycleActive('[data-gap-grid]', '.gap-card', 1800);
+        cycleActive('[data-arch-loop]', '.arch-module', 1600);
+        cycleActive('[data-runtime-flow]', '.runtime-insight', 1700);
+      }
     })();
   </script>
 </body>
